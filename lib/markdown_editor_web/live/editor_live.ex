@@ -35,6 +35,12 @@ defmodule MarkdownEditorWeb.EditorLive do
     {:noreply, assign(socket, :copy_flash, "Content copied to clipboard!")}
   end
 
+  def handle_event("copied_to_clipboard", _, socket) do
+    # We'll handle the copy action via JS on the client side
+    # This just provides feedback that the copy action was triggered
+    {:noreply, socket}
+  end
+
   @impl true
   def handle_info({:document_updated, content}, socket) do
     {:noreply, assign(socket, :markdown_content, content)}

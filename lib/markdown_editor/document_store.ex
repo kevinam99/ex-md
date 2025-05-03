@@ -1,7 +1,13 @@
 defmodule MarkdownEditor.DocumentStore do
+  use Agent
+
   @moduledoc """
   Agent-based state management for storing markdown documents
   """
+
+  def start_link(_) do
+    Agent.start_link(fn -> %{} end, name: __MODULE__)
+  end
 
   @doc """
   Get the markdown content for a specific session

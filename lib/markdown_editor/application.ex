@@ -9,7 +9,7 @@ defmodule MarkdownEditor.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: MarkdownEditor.PubSub},
       # Start the Agent for state management
-      {Agent, fn -> %{} end, name: MarkdownEditor.DocumentStore},
+      MarkdownEditor.DocumentStore,
       # Start the Endpoint (http/https)
       MarkdownEditorWeb.Endpoint
     ]
