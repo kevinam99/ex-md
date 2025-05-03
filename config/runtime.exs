@@ -54,16 +54,17 @@ if config_env() == :prod do
   config :markdown_editor, :dns_cluster_query, System.get_env("DNS_CLUSTER_QUERY")
 
   config :markdown_editor, MarkdownEditorWeb.Endpoint,
-    url: [host: host, port: 443, scheme: "https"],
-    http: [
-      # Enable IPv6 and bind on all interfaces.
-      # Set it to  {0, 0, 0, 0, 0, 0, 0, 1} for local network only access.
-      # See the documentation on https://hexdocs.pm/bandit/Bandit.html#t:options/0
-      # for details about using IPv6 vs IPv4 and loopback vs public addresses.
-      ip: {0, 0, 0, 0, 0, 0, 0, 0},
-      port: port
-    ],
-    secret_key_base: secret_key_base
+  # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
+  http: [ip: {127, 0, 0, 1}, port: 4000],
+  check_origin: false,
+  code_reloader: true,
+  debug_errors: true,
+  secret_key_base: "Q3TzALnc1gT8DNgWO4yboLb2sm//0q9LzmTuvCy3unWeEuNPmnq/xsWhcTs7+L7q",
+  watchers: [
+    esbuild: {Esbuild, :install_and_run, [:markdown_editor, ~w(--sourcemap=inline --watch)]},
+    tailwind: {Tailwind, :install_and_run, [:markdown_editor, ~w(--watch)]}
+  ]
+
 
   # ## SSL Support
   #
