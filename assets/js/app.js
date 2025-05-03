@@ -24,10 +24,10 @@ Hooks.CopyToClipboard = {
           this.pushEvent("copied_to_clipboard")
           
           // Show temporary success message
-          const flashMessage = document.createElement("span")
-          flashMessage.textContent = "Copied!"
-          flashMessage.className = "text-sm text-green-600 ml-2"
-          this.el.appendChild(flashMessage)
+          // const flashMessage = document.createElement("span")
+          // flashMessage.textContent = "Copied!"
+          // flashMessage.className = "text-sm text-green-600 ml-2"
+          // this.el.appendChild(flashMessage)
           
           // Remove the message after 2 seconds
           setTimeout(() => {
