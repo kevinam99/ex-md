@@ -30,9 +30,9 @@ Hooks.CopyToClipboard = {
           // this.el.appendChild(flashMessage)
           
           // Remove the message after 2 seconds
-          setTimeout(() => {
-            flashMessage.remove()
-          }, 2000)
+          // setTimeout(() => {
+          //   flashMessage.remove()
+          // }, 2000)
         })
         .catch(err => {
           console.error("Could not copy text: ", err)
