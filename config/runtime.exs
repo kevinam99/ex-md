@@ -18,9 +18,7 @@ import Config
 # script that automatically sets the env var above.
 config :markdown_editor, MarkdownEditorWeb.Endpoint, server: true
 
-
 if config_env() == :prod do
-
   # database_url =
   #   System.get_env("DATABASE_URL") ||
   #     raise """
