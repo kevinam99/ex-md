@@ -18,7 +18,7 @@ Hooks.CopyToClipboard = {
       const markdownOutput = document.getElementById("markdown-output")
       
       // Copy the HTML content to clipboard
-      navigator.clipboard.writeText(markdownOutput.innerHTML)
+      navigator.clipboard.writeText(markdownOutput.textContent)
         .then(() => {
           // Trigger a flash message on success
           this.pushEvent("copied_to_clipboard")
