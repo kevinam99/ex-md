@@ -13,30 +13,24 @@ let Hooks = {}
 // Hook for copying rendered markdown to clipboard
 Hooks.CopyToClipboard = {
   mounted() {
-    this.el.addEventListener("click", () => {
+    this.el.addEventListener("click", async () => {
       // Get the HTML content from the rendered markdown div
       const markdownOutput = document.getElementById("markdown-output")
       
-      // Copy the HTML content to clipboard
-      navigator.clipboard.writeText(markdownOutput.textContent.trim())
-        .then(() => {
-          // Trigger a flash message on success
-          this.pushEvent("copied_to_clipboard")
-          
-          // Show temporary success message
-          // const flashMessage = document.createElement("span")
-          // flashMessage.textContent = "Copied!"
-          // flashMessage.className = "text-sm text-green-600 ml-2"
-          // this.el.appendChild(flashMessage)
-          
-          // Remove the message after 2 seconds
-          // setTimeout(() => {
-          //   flashMessage.remove()
-          // }, 2000)
+      try {
+        const blob = new Blob([markdownOutput.innerHTML], { type: 'text/html' })
+        const clipboardItem = new ClipboardItem({
+          'text/html': blob,
+          'text/plain': new Blob([markdownOutput.textContent], { type: 'text/plain' })
         })
-        .catch(err => {
-          console.error("Could not copy text: ", err)
-        })
+        
+        await navigator.clipboard.write([clipboardItem])
+        
+        // Trigger a flash message on success
+        this.pushEvent("copied_to_clipboard")
+      } catch (err) {
+        console.error("Could not copy text: ", err)
+      }
     })
   }
 }
